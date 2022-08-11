@@ -25,7 +25,7 @@ test('Using API to get information  @e2e  @test002', async ({ }) => {
   //Required Classes initialization
   const pkAPILogic = new ApiPokemonLogic()
 
-  console.log(await pkAPILogic.returnNameOfPokemonWithThisNumber(25555))
-  console.log(await pkAPILogic.returnNumberOfPokemonWithThisName("Pikachuuu"))
+  console.log(await pkAPILogic.returnNameOfPokemonWithThisNumber(255))
+  console.log(await pkAPILogic.returnNumberOfPokemonWithThisName("Torchic"))
 
 });
