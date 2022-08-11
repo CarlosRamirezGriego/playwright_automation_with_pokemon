@@ -12,7 +12,7 @@ test('Load a Pokemon Detail Page @e2e  @test001', async ({ page }) => {
 
   await commonPage.navigateToHomepage()
   await mainPage.navigateToPokedexFromQuickLinksMenu()
-  console.log(await natPage.returnNameOfPokemonWithThisNumber("025"))
+  console.log(await natPage.returnNameOfPokemonWithThisNumber(25))
   console.log(await natPage.returnNumberOfPokemonWithThisName("Pikachu"))
   await natPage.clickPokemonWithThisName("Pikachu")
   await commonPage.sleep(5000)

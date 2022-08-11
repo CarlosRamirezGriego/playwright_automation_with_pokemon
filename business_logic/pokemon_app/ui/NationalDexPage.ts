@@ -33,10 +33,10 @@ export class NationalDexPageClass
     }
 	
 	
-	async doesAPokemonWithThisNumberExist(targetNumber: string): Promise<boolean>
+	async doesAPokemonWithThisNumberExist(targetNumber: number): Promise<boolean>
     {
 		let exist: boolean = false
-		targetNumber = "#"+targetNumber
+		let targetNumberString: string = "#"+ await this.formatNumber(targetNumber)
         const commonPage = new CommonClass(this.page)
         let allPokemonNumbers: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NUMBER_LABEL, 1000, 5, true)
         let amount: number = await allPokemonNumbers.count()
@@ -45,7 +45,7 @@ export class NationalDexPageClass
         {
             let pokemonNumber_label: Locator =  await allPokemonNumbers.nth(index)
             let actualNumber: string = await pokemonNumber_label.innerText()
-            if(actualNumber == targetNumber)
+            if(actualNumber == targetNumberString)
             {
                 exist = true
                 break
@@ -56,7 +56,7 @@ export class NationalDexPageClass
     }
 	
 	
-	async returnNameOfPokemonWithThisNumber(targetNumber: string): Promise<string>
+	async returnNameOfPokemonWithThisNumber(targetNumber: number): Promise<string>
 	{
 		let name: string = null
         const commonPage = new CommonClass(this.page)
@@ -124,5 +124,23 @@ export class NationalDexPageClass
 		{
 			console.log("clickPokemonWithThisName() could not find Pokemon named: "+targetName)
 		}
+	}
+
+	async formatNumber(targetNumber: number): Promise<string>
+	{
+		let stringNumber: string = null
+		if(targetNumber > 1 && targetNumber <= 9)
+		{
+			stringNumber = "00"+targetNumber.toString()
+		}
+		else if(targetNumber > 10 && targetNumber <= 99)
+		{
+			stringNumber = "0"+targetNumber.toString()
+		}
+		else if(targetNumber > 99)
+		{
+			stringNumber = targetNumber.toString()
+		}
+		return stringNumber
 	}
 }
