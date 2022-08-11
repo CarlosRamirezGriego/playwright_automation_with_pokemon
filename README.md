@@ -1,6 +1,8 @@
 # playwright_automation_with_pokemon
 Playwright Sample UI/API automation
 
+Explanation Document: https://docs.google.com/document/d/12ToomW2OPLjmDty19KAyOUAWpzey3XQ2fxZJDAxuAN4/edit?usp=sharing
+
 Install Playwright using NPM: npm init playwright, npm i -D @playwright/test
 
 Leave all the default selections: Typescript
