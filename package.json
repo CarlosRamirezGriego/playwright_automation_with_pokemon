@@ -1,0 +1,24 @@
+{
+  "name": "playwright_automation_with_pokemon",
+  "version": "1.0.0",
+  "description": "Playwright Sample UI/API automation",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosRamirezGriego/playwright_automation_with_pokemon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlosRamirezGriego/playwright_automation_with_pokemon/issues"
+  },
+  "homepage": "https://github.com/CarlosRamirezGriego/playwright_automation_with_pokemon#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.25.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
