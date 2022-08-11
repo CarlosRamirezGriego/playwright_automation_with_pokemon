@@ -18,7 +18,7 @@ export class NationalDexPageClass
         let allPokemonNames: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NAME_LINK, 1000, 5, true)
         let amount: number = await allPokemonNames.count()
         let index: number = 0
-        while(index <= amount)
+        while(index <= amount-1)
         {
             let pokemonName_label: Locator =  await allPokemonNames.nth(index)
             let name: string = await pokemonName_label.innerText()
@@ -36,11 +36,12 @@ export class NationalDexPageClass
 	async doesAPokemonWithThisNumberExist(targetNumber: string): Promise<boolean>
     {
 		let exist: boolean = false
+		targetNumber = "#"+targetNumber
         const commonPage = new CommonClass(this.page)
         let allPokemonNumbers: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NUMBER_LABEL, 1000, 5, true)
         let amount: number = await allPokemonNumbers.count()
         let index: number = 0
-        while(index <= amount)
+        while(index <= amount-1)
         {
             let pokemonNumber_label: Locator =  await allPokemonNumbers.nth(index)
             let actualNumber: string = await pokemonNumber_label.innerText()
@@ -63,10 +64,13 @@ export class NationalDexPageClass
 		if(numberExist)
 		{
 			let allPokemonNames: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NAME_LINK, 1000, 5, true)
-			let amount: number = await allPokemonNames.count()
 			let index: number = Number(targetNumber) - 1
 			let pokemonName_label: Locator =  await allPokemonNames.nth(index)
             name = await pokemonName_label.innerText()
+		}
+		else
+		{
+			console.log("returnNameOfPokemonWithThisNumber() could not find Name of Pokemon with Number: "+targetNumber)
 		}
 		return name
 	}
@@ -82,7 +86,7 @@ export class NationalDexPageClass
 			let allPokemonNames: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NAME_LINK, 1000, 5, true)
 			let amount: number = await allPokemonNames.count()
 			let index: number = 0
-			while(index <= amount)
+			while(index <= amount-1)
 			{
 				let pokemonName: Locator =  await allPokemonNames.nth(index)
 				let name: string = await pokemonName.innerText()
@@ -94,6 +98,10 @@ export class NationalDexPageClass
 				}
 				index = index + 1
 			}
+		}
+		else
+		{
+			console.log("returnNumberOfPokemonWithThisName() could not find Number of Pokemon with Name: "+targetName)
 		}
 		return pkNumber
 	}
@@ -108,7 +116,7 @@ export class NationalDexPageClass
 			let targetIndex: number = Number(pkNumber)
 		    const commonPage = new CommonClass(this.page)
 			let allPokemonNames: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NAME_LINK, 1000, 5, true)
-			let pokemonName_link: Locator =  await allPokemonNames.nth(targetIndex)
+			let pokemonName_link: Locator =  await allPokemonNames.nth(targetIndex-1)
 			await pokemonName_link.waitFor({state:"visible", timeout: 7000})
 			await pokemonName_link.click()
 		}
