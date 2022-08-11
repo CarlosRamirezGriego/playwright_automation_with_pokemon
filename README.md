@@ -12,5 +12,5 @@ Install Axios library using NPM: npm install axios
 
 
 All: npx playwright test --headed
-With specific tag "smoke": npx playwright test --grep @smoke --headed
-With specific configuration: npx playwright test --grep @login --headed --config=tests/web.config.ts
+With specific tag "smoke": npx playwright test --grep test001 --headed
+With specific configuration: npx playwright test --grep test001 --headed --config=tests/web.config.ts
