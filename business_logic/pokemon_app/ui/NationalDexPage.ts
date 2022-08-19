@@ -58,7 +58,7 @@ export class NationalDexPageClass
 	
 	async returnNameOfPokemonWithThisNumber(targetNumber: number): Promise<string>
 	{
-		let name: string = null
+		let name: string = ""
         const commonPage = new CommonClass(this.page)
 		let numberExist: boolean = await this.doesAPokemonWithThisNumberExist(targetNumber)
 		if(numberExist)
@@ -76,9 +76,9 @@ export class NationalDexPageClass
 	}
 	
 	
-	async returnNumberOfPokemonWithThisName(targetName: string): Promise<string>
+	async returnNumberOfPokemonWithThisName(targetName: string): Promise<number>
 	{
-		let pkNumber: string = "-1"
+		let pkNumber: number = -1
 		let nameExist: boolean = await this.doesAPokemonWithThisNameExist(targetName)
 		if(nameExist)
 		{
@@ -93,7 +93,7 @@ export class NationalDexPageClass
 				if(name == targetName)
 				{
 					var value = index + 1
-                    pkNumber = value.toString()
+                    pkNumber = value
 					break
 				}
 				index = index + 1
@@ -112,11 +112,10 @@ export class NationalDexPageClass
 		let nameExist: boolean = await this.doesAPokemonWithThisNameExist(targetName)
 		if(nameExist)
 		{
-			let pkNumber: string = await this.returnNumberOfPokemonWithThisName(targetName)
-			let targetIndex: number = Number(pkNumber)
+			let pkNumber: number = await this.returnNumberOfPokemonWithThisName(targetName)
 		    const commonPage = new CommonClass(this.page)
 			let allPokemonNames: Locator = await commonPage.waitForElements(this.page, NationalDex_ListPokemon().POKEMON_NAME_LINK, 1000, 5, true)
-			let pokemonName_link: Locator =  await allPokemonNames.nth(targetIndex-1)
+			let pokemonName_link: Locator =  await allPokemonNames.nth(pkNumber-1)
 			await pokemonName_link.waitFor({state:"visible", timeout: 7000})
 			await pokemonName_link.click()
 		}
@@ -128,7 +127,7 @@ export class NationalDexPageClass
 
 	async formatNumber(targetNumber: number): Promise<string>
 	{
-		let stringNumber: string = null
+		let stringNumber: string = ""
 		if(targetNumber > 1 && targetNumber <= 9)
 		{
 			stringNumber = "00"+targetNumber.toString()
