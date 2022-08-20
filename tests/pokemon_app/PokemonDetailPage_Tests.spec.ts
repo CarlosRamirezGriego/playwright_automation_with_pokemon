@@ -32,7 +32,7 @@ test('API Should return a 404 code for non existin Pokemon  @e2e  @test002', asy
   let byName: AxiosResponse = await pkAPILogic.returnAllInformationFromPokemonWithThisName("Pikachu")
   let pkName: string = await pkAPILogic.returnNameOfPokemonWithThisNumber(25)
   let pkNumber: number = await pkAPILogic.returnNumberOfPokemonWithThisName("Pikachu")
-  expect(pkName).toEqual("Pikachu")
+  expect(pkName).toEqual("pikachu")
   expect(pkNumber).toEqual(25)
   expect(nmExist).toEqual(true)
   expect(numExist).toEqual(true)
