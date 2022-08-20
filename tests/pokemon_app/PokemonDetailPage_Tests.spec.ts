@@ -3,6 +3,7 @@ import { MainPageClass } from "../../business_logic/pokemon_app/ui/MainPage";
 import { NationalDexPageClass } from "../../business_logic/pokemon_app/ui/NationalDexPage";
 import { ApiPokemonLogic } from "../../business_logic/pokemon_app/api/Pokemon"
 import { CommonClass } from "../../common/pokemon_app/CommonUI";
+import { AxiosResponse } from 'axios';
 
 
 test('Load a Pokemon Detail Page @e2e  @test001', async ({ page }) => {
@@ -21,11 +22,21 @@ test('Load a Pokemon Detail Page @e2e  @test001', async ({ page }) => {
 });
 
 
-test('Using API to get information  @e2e  @test002', async ({ }) => {
+test('API Should return a 404 code for non existin Pokemon  @e2e  @test002', async ({ }) => {
   //Required Classes initialization
   const pkAPILogic = new ApiPokemonLogic()
 
-  console.log(await pkAPILogic.returnNameOfPokemonWithThisNumber(255))
-  console.log(await pkAPILogic.returnNumberOfPokemonWithThisName("Torchic"))
+  let numExist: boolean = await pkAPILogic.isThereAPokemonWithThisNumber(25)
+  let nmExist: boolean = await pkAPILogic.isThereAPokemonWithThisName("Pikachu")
+  let byNumber: AxiosResponse = await pkAPILogic.returnAllInformationFromPokemonWithThisNumber(25)
+  let byName: AxiosResponse = await pkAPILogic.returnAllInformationFromPokemonWithThisName("Pikachu")
+  let pkName: string = await pkAPILogic.returnNameOfPokemonWithThisNumber(25)
+  let pkNumber: number = await pkAPILogic.returnNumberOfPokemonWithThisName("Pikachu")
+  expect(pkName).toEqual("Pikachu")
+  expect(pkNumber).toEqual(25)
+  expect(nmExist).toEqual(true)
+  expect(numExist).toEqual(true)
+  expect(byNumber.status).toEqual(200)
+  expect(byName.status).toEqual(200)
 
 });
