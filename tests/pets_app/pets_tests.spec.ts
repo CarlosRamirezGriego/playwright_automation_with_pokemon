@@ -12,7 +12,7 @@ test(`Add Pet`, async({page}) => {
 
 
 
-test.describe('Update Pet TEst', () => {
+test.describe('Update Pets DataDriven Tests', () => {
   const testData = [
     {
       "status":"available",
@@ -35,6 +35,8 @@ test.describe('Update Pet TEst', () => {
         let payload = `{"id":10,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"${status}"}`
         let response: APIResponse = await PetAPI.add_pet_information(payload);
         expect(response.status()).toEqual(200)
+
+        //Read the Response into a JSON
         let data = JSON.parse(await response.text())
         expect(data.status).toEqual(status)
       })
@@ -44,7 +46,7 @@ test.describe('Update Pet TEst', () => {
   
 
 
-test.describe('Data Driven Get', () => {
+test.describe('Get Pets DataDriven Tests', () => {
 
     test.beforeEach(async({page}) => {
         PetAPI.initialize(page)
@@ -57,10 +59,15 @@ test.describe('Data Driven Get', () => {
         "name": "Valid User"
         }, 
         {
-        "id":"1",
+        "id":"15615612",
         "result": 404,
+        "name": "Non Existing User"
+        },
+        {
+        "id":"abc",
+        "result": 400,
         "name": "invalid User"
-        }, 
+        }
     ]
 
     testData.forEach(({id, result, name}) => {
