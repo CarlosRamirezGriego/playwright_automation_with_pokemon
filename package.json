@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/CarlosRamirezGriego/playwright_automation_with_pokemon#readme",
   "devDependencies": {
-    "@playwright/test": "^1.25.0"
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.12.12"
   },
   "dependencies": {
     "axios": "^0.27.2"
