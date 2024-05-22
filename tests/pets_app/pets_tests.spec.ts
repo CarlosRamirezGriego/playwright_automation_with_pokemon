@@ -5,7 +5,7 @@ import {PetAPI} from '../../api_clients/petStore_app/PetAPI'
 
 test(`Add Pet`, async({page}) => {
     PetAPI.initialize(page)
-    let payload = '{"id":10,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"}'
+    let payload = '{"id":117,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"}'
     let response: APIResponse = await PetAPI.add_pet_information(payload);
     expect(response.status()).toEqual(200)
   })
@@ -32,8 +32,8 @@ test.describe('Update Pets DataDriven Tests', () => {
   testData.forEach(({status, name}) => {
     test(`Update Pet - ${name}`, async({page}) => {
         PetAPI.initialize(page)
-        let payload = `{"id":10,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"${status}"}`
-        let response: APIResponse = await PetAPI.add_pet_information(payload);
+        let payload = `{"id":1,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"${status}"}`
+        let response: APIResponse = await PetAPI.update_pet_information(payload);
         expect(response.status()).toEqual(200)
 
         //Read the Response into a JSON
@@ -50,6 +50,8 @@ test.describe('Get Pets DataDriven Tests', () => {
 
     test.beforeEach(async({page}) => {
         PetAPI.initialize(page)
+        let payload = '{"id":10,"name":"doggie","category":{"id":1,"name":"Dogs"},"photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"}'
+        let response: APIResponse = await PetAPI.add_pet_information(payload);
     })
 
     const testData = [
